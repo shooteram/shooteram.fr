@@ -32,10 +32,9 @@ jobs:
       - uses: olegtarasov/get-tag@v2.1
         with:
           tagRegex: "v(.*)"
-      - name: _
-        run: echo "::set-output name:image::ghcr.io/shooteram/shooteram.fr:$GIT_TAG_NAME"
+      - run: echo "::set-output name:img::ghcr.io/shooteram/shooteram.fr:$GIT_TAG_NAME"
         id: image
       - uses: azure/k8s-deploy@v1
         with:
           manfests: .devops/shooteram.fr.yaml
-          images: ${{ steps.image.outputs.image }}
+          images: ${{ steps.image.outputs.img }}
