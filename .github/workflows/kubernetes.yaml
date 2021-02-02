@@ -36,5 +36,5 @@ jobs:
         id: image
       - uses: azure/k8s-deploy@v1
         with:
-          manfests: .devops/shooteram.fr.yaml
+          manifests: .devops/shooteram.fr.yaml
           images: ${{ steps.image.outputs.image }}
