@@ -16,7 +16,7 @@ jobs:
           dockerfile: .devops/Dockerfile
           registry: ghcr.io
           username: shooteram
-          password: ${{ secrets.GITHUB_TOKEN }}
+          password: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
   deploy:
     needs:
       - build
