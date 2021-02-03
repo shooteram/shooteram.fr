@@ -18,8 +18,10 @@ RUN chown -R nginx:nginx /var/www/shooteram.fr && \
     chmod ug+rwx -R /var/www/shooteram.fr
 
 USER nginx
-RUN composer install --no-ansi --no-dev --no-interaction --no-plugins \
-    --no-progress --no-scripts --optimize-autoloader
+RUN composer install --no-ansi --no-interaction --no-plugins --no-progress \
+    --no-scripts --optimize-autoloader && \
+    rm .env && \
+    touch .env
 
 USER root
 RUN ln -sf /dev/stdout /var/log/nginx/access.log && \

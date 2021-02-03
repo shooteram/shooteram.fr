@@ -19,6 +19,16 @@ spec:
       containers:
         - name: shooteram
           image: ghcr.io/shooteram/shooteram.fr
+          env:
+            - name: APP_ENV
+              value: "prod"
+            - name: APP_DEBUG
+              value: "0"
+            - name: APP_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: symfony-shooteram-fr
+                  key: shooteram-fr-symfony-env-secret
           ports:
             - name: web
               containerPort: 80
