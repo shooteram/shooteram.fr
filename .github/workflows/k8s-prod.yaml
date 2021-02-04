@@ -1,4 +1,4 @@
-name: Kubernetes
+name: Kubernetes - prod env
 
 on:
   push:
@@ -17,6 +17,7 @@ jobs:
           registry: ghcr.io
           username: shooteram
           password: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          buildArgs: COMPOSER_ARGS=--no-dev,
   deploy:
     needs:
       - build
@@ -34,7 +35,5 @@ jobs:
         id: image
       - uses: azure/k8s-deploy@v1
         with:
-          manifests: |
-            .devops/shooteram.fr.yaml
-            .devops/dev.shooteram.fr.yaml
+          manifests: .devops/shooteram.fr.yaml
           images: ${{ steps.image.outputs.image }}
