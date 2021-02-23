@@ -19,7 +19,8 @@ RUN chown -R nginx:nginx /var/www/shooteram.fr && \
 
 USER nginx
 RUN composer install --no-ansi --no-interaction --no-plugins --no-progress \
-    --no-scripts --optimize-autoloader --no-dev
+    --no-scripts --optimize-autoloader --no-dev && \
+    composer dump-env prod --empty
 
 USER root
 RUN ln -sf /dev/stdout /var/log/nginx/access.log && \
