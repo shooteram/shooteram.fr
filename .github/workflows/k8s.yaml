@@ -1,10 +1,8 @@
-name: Kubernetes - prod env
-
+name: Kubernetes
 on:
   push:
     tags:
       - v*
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -17,7 +15,6 @@ jobs:
           registry: ghcr.io
           username: shooteram
           password: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
-          buildArgs: COMPOSER_ARGS=--no-dev,
   deploy:
     needs:
       - build
@@ -27,8 +24,7 @@ jobs:
       - uses: azure/k8s-set-context@v1
         with:
           method: kubeconfig
-          kubeconfig: ${{ secrets.KSRV1_KUBECONFIG }}
-          context: ${{ secrets.KUBERNETES_CONTEXT }}
+          kubeconfig: ${{ secrets.KS1_KUBECONFIG }}
         id: setcontext
       - uses: olegtarasov/get-tag@v2.1
       - run: echo "::set-output name=image::ghcr.io/shooteram/shooteram.fr:$GIT_TAG_NAME"
